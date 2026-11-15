@@ -919,6 +919,10 @@ type BackendHTTP3Settings struct {
 type GRPCSettings struct {
 	EnableGRPCWeb   *bool `json:"enableGRPCWeb,omitempty" yaml:"enableGRPCWeb,omitempty"`
 	EnableGRPCStats *bool `json:"enableGRPCStats,omitempty" yaml:"enableGRPCStats,omitempty"`
+	// RateLimitedAsResourceExhausted makes the rate limit filters return the gRPC
+	// status RESOURCE_EXHAUSTED instead of UNAVAILABLE for rate-limited gRPC requests.
+	// https://www.envoyproxy.io/docs/envoy/latest/api-v3/extensions/filters/http/ratelimit/v3/rate_limit.proto#extensions-filters-http-ratelimit-v3-ratelimit
+	RateLimitedAsResourceExhausted bool `json:"rateLimitedAsResourceExhausted,omitempty" yaml:"rateLimitedAsResourceExhausted,omitempty"`
 }
 
 // ResponseOverride defines the configuration to override specific responses with a custom one.

@@ -3016,6 +3016,7 @@ _Appears in:_
 | Field | Type | Required | Default | Description |
 | ---   | ---  | ---      | ---     | ---         |
 | `enableWeb` | _boolean_ |  false  |  | EnableWeb configures the gRPC-web filter on the listener.<br />The gRPC-web filter allows clients (typically browsers) to make gRPC calls<br />using HTTP/1.1 or HTTP/2.<br />This is enabled by default for GRPCRoute and opt-in for HTTPRoute.<br />In general, gRPC traffic should be handled via GRPCRoute, but there are cases where<br />users want to route gRPC using HTTPRoute for its richer matching capabilities.<br />Therefore, we enable this behavior only when it is explicitly opted in. |
+| `rateLimitedAsResourceExhausted` | _boolean_ |  false  |  | RateLimitedAsResourceExhausted configures the global and local rate limit<br />filters to return the gRPC status RESOURCE_EXHAUSTED (8), rather than<br />UNAVAILABLE (14), when a gRPC request is rate limited.<br />Envoy maps a 429 response to UNAVAILABLE by default, which most gRPC clients<br />treat as retryable.<br />If not set, rate-limited gRPC requests receive UNAVAILABLE. |
 
 
 #### GRPCSuccessCode

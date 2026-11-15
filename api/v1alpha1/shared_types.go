@@ -876,6 +876,17 @@ type GRPCSettings struct {
 	//
 	// +optional
 	EnableWeb *bool `json:"enableWeb,omitempty"`
+
+	// RateLimitedAsResourceExhausted configures the global and local rate limit
+	// filters to return the gRPC status RESOURCE_EXHAUSTED (8), rather than
+	// UNAVAILABLE (14), when a gRPC request is rate limited.
+	// Envoy maps a 429 response to UNAVAILABLE by default, which most gRPC clients
+	// treat as retryable.
+	//
+	// If not set, rate-limited gRPC requests receive UNAVAILABLE.
+	//
+	// +optional
+	RateLimitedAsResourceExhausted *bool `json:"rateLimitedAsResourceExhausted,omitempty"`
 }
 
 // ResponseOverrideSource specifies the source of responses to override.

@@ -1,0 +1,1 @@
+Added `ClientTrafficPolicy.spec.grpc.rateLimitedAsResourceExhausted` to return the gRPC status `RESOURCE_EXHAUSTED` instead of `UNAVAILABLE` when the global or local rate limit filter limits a gRPC request.

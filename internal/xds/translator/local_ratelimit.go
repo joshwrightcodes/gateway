@@ -202,6 +202,10 @@ func (*localRateLimit) patchRoute(route *routev3.Route, irRoute *ir.HTTPRoute, h
 	if httpListener.Headers != nil && httpListener.Headers.DisableRetryAfterHeader {
 		localRl.EnableRetryAfterHeader = false
 	}
+	// Return RESOURCE_EXHAUSTED rather than UNAVAILABLE to rate-limited gRPC requests, if enabled.
+	if httpListener.GRPC != nil && httpListener.GRPC.RateLimitedAsResourceExhausted {
+		localRl.RateLimitedAsResourceExhausted = true
+	}
 
 	localRlAny, err := anypb.New(localRl)
 	if err != nil {

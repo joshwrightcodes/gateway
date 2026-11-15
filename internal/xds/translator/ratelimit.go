@@ -155,6 +155,11 @@ func createRateLimitFilter(t *Translator, irListener *ir.HTTPListener, domain, f
 		rateLimitFilterProto.EnableRetryAfterHeader = false
 	}
 
+	// Return RESOURCE_EXHAUSTED rather than UNAVAILABLE to rate-limited gRPC requests, if enabled.
+	if irListener.GRPC != nil && irListener.GRPC.RateLimitedAsResourceExhausted {
+		rateLimitFilterProto.RateLimitedAsResourceExhausted = true
+	}
+
 	// Set the failure mode to deny if the global rate limit is configured to fail closed
 	if t.GlobalRateLimit.FailClosed {
 		rateLimitFilterProto.FailureModeDeny = t.GlobalRateLimit.FailClosed

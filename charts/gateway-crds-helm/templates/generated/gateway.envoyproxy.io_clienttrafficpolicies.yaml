@@ -264,6 +264,16 @@ spec:
                       users want to route gRPC using HTTPRoute for its richer matching capabilities.
                       Therefore, we enable this behavior only when it is explicitly opted in.
                     type: boolean
+                  rateLimitedAsResourceExhausted:
+                    description: |-
+                      RateLimitedAsResourceExhausted configures the global and local rate limit
+                      filters to return the gRPC status RESOURCE_EXHAUSTED (8), rather than
+                      UNAVAILABLE (14), when a gRPC request is rate limited.
+                      Envoy maps a 429 response to UNAVAILABLE by default, which most gRPC clients
+                      treat as retryable.
+
+                      If not set, rate-limited gRPC requests receive UNAVAILABLE.
+                    type: boolean
                 type: object
               headers:
                 description: HeaderSettings provides configuration for header management.

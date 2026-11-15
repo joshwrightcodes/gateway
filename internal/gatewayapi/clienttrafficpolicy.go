@@ -1238,6 +1238,7 @@ func translateGRPCSettings(grpcSettings *egv1a1.GRPCSettings, httpIR *ir.HTTPLis
 		httpIR.GRPC = &ir.GRPCSettings{}
 	}
 	httpIR.GRPC.EnableGRPCWeb = grpcSettings.EnableWeb
+	httpIR.GRPC.RateLimitedAsResourceExhausted = ptr.Deref(grpcSettings.RateLimitedAsResourceExhausted, false)
 }
 
 func translateHealthCheckSettings(healthCheckSettings *egv1a1.HealthCheckSettings, httpIR *ir.HTTPListener) {
